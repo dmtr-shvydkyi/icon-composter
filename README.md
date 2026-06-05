@@ -1,5 +1,10 @@
 # Icon Composter
 
+### ⬇️ [Download the app (Icon-Composter.zip)](https://github.com/dmtr-shvydkyi/icon-composter/releases/latest/download/Icon-Composter.zip)
+
+> First launch: move it to `~/Applications`, then **right-click → Open** once.
+> Requires macOS 26 (Tahoe) and Xcode. See [Sending it to teammates](#sending-it-to-teammates).
+
 A tiny macOS Tahoe app for live-testing app icons made in **Icon Composer**.
 Drop a `.icon` file and it becomes the app's **real** Dock icon — so it renders
 with full system styling (light/dark **and** the Default / Dark / Clear / Tinted
