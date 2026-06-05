@@ -3,7 +3,7 @@
 ### ⬇️ [Download the app (Icon-Composter.zip)](https://github.com/dmtr-shvydkyi/icon-composter/releases/latest/download/Icon-Composter.zip)
 
 > First launch: move it to `~/Applications`, then **right-click → Open** once.
-> Requires macOS 26 (Tahoe) and Xcode. See [Sending it to teammates](#sending-it-to-teammates).
+> Requires macOS 26 (Tahoe) and Xcode. See [Installing on another Mac](#installing-on-another-mac).
 
 A tiny macOS Tahoe app for live-testing app icons made in **Icon Composer**.
 Drop a `.icon` file and it becomes the app's **real** Dock icon — so it renders
@@ -44,7 +44,7 @@ system's Liquid Glass / Clear / Tinted treatment — that's applied by the syste
 
 The Dock then renders it natively and responds to every appearance setting.
 
-## Sending it to teammates
+## Installing on another Mac
 
 The build is **ad-hoc signed** (no Developer ID), so the first launch on
 another Mac trips Gatekeeper. To install:
@@ -56,9 +56,8 @@ another Mac trips Gatekeeper. To install:
    ```
 3. Drop a `.icon` and go.
 
-> Proper notarization (no warning at all) would require an Apple Developer ID
-> and re-architecting the self-modifying bundle — out of scope for an internal
-> tool. See the project notes if you want to pursue it.
+> Proper notarization (no Gatekeeper warning at all) would require an Apple
+> Developer ID and re-architecting the self-modifying bundle.
 
 ## Releasing a new version
 
@@ -70,7 +69,7 @@ with the zip attached:
 ```
 
 The download link stays the same (`…/releases/latest/download/Icon-Composter.zip`),
-so teammates always get the newest build from the same URL.
+so it always points at the newest build.
 
 ## Files
 

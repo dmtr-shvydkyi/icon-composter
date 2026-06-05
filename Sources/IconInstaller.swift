@@ -9,10 +9,13 @@ enum IconInstaller {
 
     enum InstallError: LocalizedError {
         case step(String, Int32, String)
+        case missingXcode
         var errorDescription: String? {
             switch self {
             case .step(let name, let code, let out):
                 return "\(name) failed (\(code)). \(out)"
+            case .missingXcode:
+                return "Needs Xcode — it uses actool to render the .icon. Install Xcode, then try again."
             }
         }
     }
@@ -22,6 +25,7 @@ enum IconInstaller {
 
     /// Compile `iconURL` into our bundle as AppIcon, re-sign, re-register, relaunch.
     static func installAndRelaunch(iconURL: URL) throws {
+        try ensureXcodeAvailable()
         let bundleURL = Bundle.main.bundleURL
         let resources = bundleURL.appendingPathComponent("Contents/Resources", isDirectory: true)
         let fm = FileManager.default
@@ -76,6 +80,19 @@ enum IconInstaller {
     }
 
     // MARK: - Plumbing
+
+    /// `actool` ships only with Xcode (not the Command Line Tools alone), so
+    /// fail early with a clear message if it isn't reachable.
+    private static func ensureXcodeAvailable() throws {
+        let p = Process()
+        p.executableURL = URL(fileURLWithPath: "/usr/bin/xcrun")
+        p.arguments = ["-f", "actool"]
+        p.standardOutput = Pipe()
+        p.standardError = Pipe()
+        do { try p.run() } catch { throw InstallError.missingXcode }
+        p.waitUntilExit()
+        if p.terminationStatus != 0 { throw InstallError.missingXcode }
+    }
 
     private static func finalizeAndRelaunch(bundleURL: URL) {
         // Re-sign (modifying Resources breaks the ad-hoc seal) and re-register
