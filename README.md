@@ -60,6 +60,18 @@ another Mac trips Gatekeeper. To install:
 > and re-architecting the self-modifying bundle — out of scope for an internal
 > tool. See the project notes if you want to pursue it.
 
+## Releasing a new version
+
+One command — bumps the version, builds, zips, and publishes a GitHub release
+with the zip attached:
+
+```sh
+./release.sh v1.1
+```
+
+The download link stays the same (`…/releases/latest/download/Icon-Composter.zip`),
+so teammates always get the newest build from the same URL.
+
 ## Files
 
 - `Sources/IconPreviewApp.swift` — app entry, Open-With handling
